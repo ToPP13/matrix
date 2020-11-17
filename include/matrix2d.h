@@ -79,7 +79,7 @@ private:
             {
                 for (auto elem : array_pair.second.get_data())
                 {
-                    vals.push_back(std::make_tuple(array_pair.first, elem.first, elem.second));
+                    refs.push_back(std::make_tuple(array_pair.first, elem.first));
                 }
             }
         };
@@ -93,13 +93,18 @@ private:
 
         std::tuple<uint,uint,T> & operator*()
         {
-            return vals[i];
+            uint arr_ref, elem_ref;
+            std::tie(arr_ref, elem_ref) = refs[i];
+            T& val = _o[arr_ref][elem_ref];
+            cur_val = std::tie(arr_ref, elem_ref, val);
+            return cur_val;
         }
 
     private:
         Matrix2D& _o;
         uint i;
-        std::vector<std::tuple<uint,uint,T>> vals;
+        std::tuple<uint,uint,T> cur_val;
+        std::vector<std::tuple<uint,uint>> refs;
     };
 
 
