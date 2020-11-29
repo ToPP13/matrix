@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 
-
 if (DEFINED ENV{TRAVIS_BUILD_NUMBER})
     project(matrix VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
@@ -30,21 +29,15 @@ file (GLOB MAIN_INCLUDES
         )
 
 
-
 source_group("src" FILES ${MAIN_SRC})
 source_group("test" FILES ${MAIN_TEST})
 source_group("include" FILES ${MAIN_INCLUDES})
 
 
-#include_directories(${PROJECT_SOURCE_DIR}/test/)
-
-
 # Add an executable to the project using the specified source files.
-add_executable(matrix_cli src/matrix.cpp)
-
+add_executable(matrix_cli src/matrix.cpp )
 # Add a library to the project using the specified source files.
-add_library(matrix src/lib.cpp)
-
+add_library(matrix src/lib.cpp )
 add_executable(gtest test/gtest.cpp)
 
 
